@@ -13,7 +13,7 @@ defmodule ElixirSegmentAPI do
       # {:error, "invalid poison"}
   """
   def track(event, userId, properties) do
-    case Poison.encode!(%{event: event, userId: userId, properties: properties}) do
+    case Poison.encode(%{event: event, userId: userId, properties: properties}) do
       {:ok, http_body} ->
         post("#{@endpoint}/track", http_body, headers())
 
