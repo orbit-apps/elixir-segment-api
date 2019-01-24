@@ -23,8 +23,8 @@ config :elixir_segment_api, :api_key, "<your encoded basic auth keys>"
 Use like
 
 ```elixir
-app_slug = "shopify-store"
-shopify_domain = "#{app_slug}.myshopify.com"
+app_slug = "USO"
+shopify_domain = "example.myshopify.com"
 type = :customer_data_request
 
 ElixirSegmentAPI.track(
