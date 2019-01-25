@@ -1,4 +1,4 @@
-defmodule ElixirSegmentAPI do
+defmodule SegmentAPI do
   @moduledoc """
   Segment API
   """
@@ -7,12 +7,10 @@ defmodule ElixirSegmentAPI do
 
   @endpoint "https://api.segment.io/v1"
   # As per docs https://segment.com/docs/sources/server/http/
-  @auth_header "Basic #{
-                 Base.encode64(Application.get_env(:elixir_segment_api, :api_key, "") <> ":")
-               }"
+  @auth_header "Basic #{Base.encode64(Application.get_env(:segment_api, :api_key, "") <> ":")}"
 
   @doc """
-    -> ElixirSegmentAPI.track(bad, bad, bad)
+    -> SegmentAPI.track(bad, bad, bad)
       # {:error, "invalid poison"}
   """
   def track(event, userId, properties) do

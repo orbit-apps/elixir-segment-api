@@ -1,10 +1,10 @@
-defmodule ElixirSegmentAPI.MixProject do
+defmodule SegmentAPI.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :elixir_segment_api,
-      version: "0.1.2",
+      app: :segment_api,
+      version: "0.2.0",
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps()

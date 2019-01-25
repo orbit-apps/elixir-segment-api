@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :elixir_segment_api, key: :value
+#     config :segment_api, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:elixir_segment_api, :key)
+#     Application.get_env(:segment_api, :key)
 #
 # You can also configure a 3rd-party app:
 #
