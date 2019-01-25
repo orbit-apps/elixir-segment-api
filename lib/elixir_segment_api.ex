@@ -6,7 +6,10 @@ defmodule ElixirSegmentAPI do
   require Logger
 
   @endpoint "https://api.segment.io/v1"
-  @auth_header "Basic #{Base.encode64(Application.get_env(:elixir_segment_api, :api_key, ""))}"
+  # As per docs https://segment.com/docs/sources/server/http/
+  @auth_header "Basic #{
+                 Base.encode64(Application.get_env(:elixir_segment_api, :api_key, "") <> ":")
+               }"
 
   @doc """
     -> ElixirSegmentAPI.track(bad, bad, bad)
