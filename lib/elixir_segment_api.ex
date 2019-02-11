@@ -15,12 +15,14 @@ defmodule SegmentAPI do
       # {:error, "invalid poison"}
   """
   def track(event, user_id, properties) do
-    case Poison.encode(%{
-           event: event,
-           userId: user_id,
-           properties: properties,
-           context: context()
-         }) do
+    body = %{
+      event: event,
+      userId: user_id,
+      properties: properties,
+      context: context()
+    }
+
+    case Poison.encode(body) do
       {:ok, http_body} ->
         post("#{@endpoint}/track", http_body, headers())
 
@@ -30,7 +32,9 @@ defmodule SegmentAPI do
   end
 
   def identify(user_id, traits) do
-    case Poison.encode(%{userId: user_id, traits: traits, context: context()}) do
+    body = %{userId: user_id, traits: traits, context: context()}
+
+    case Poison.encode(body) do
       {:ok, http_body} ->
         post("#{@endpoint}/identify", http_body, headers())
 
