@@ -7,7 +7,6 @@ defmodule SegmentAPI do
 
   @endpoint "https://api.segment.io/v1"
   # As per docs https://segment.com/docs/sources/server/http/
-  @auth_header "Basic #{Base.encode64(Application.get_env(:segment_api, :api_key, "") <> ":")}"
   @app_version Keyword.get(Mix.Project.config(), :version)
 
   @doc """
@@ -32,5 +31,7 @@ defmodule SegmentAPI do
   def process_response_status_code(status_code),
     do: Logger.info("#{__MODULE__} not successfully called, returned #{status_code}")
 
-  defp headers, do: [Authorization: @auth_header, "Content-Type": "application/json"]
+  defp headers, do: [Authorization: auth_header(), "Content-Type": "application/json"]
+
+  defp auth_header, do: "Basic #{Base.encode64(Application.get_env(:segment_api, :api_key, "") <> ":")}"
 end
