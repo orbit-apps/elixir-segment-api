@@ -13,37 +13,49 @@ defmodule SegmentAPI do
     -> SegmentAPI.track(bad, bad, bad)
       # {:error, "invalid poison"}
   """
-  def track(event, user_id, properties) do
+  def track(event, user_id, properties, options \\ %{}) do
     body = %{
       event: event,
       userId: user_id,
       properties: properties,
-      context: context()
+      context: context(),
+      integrations: Map.get(options, :integrations)
     }
 
-    case Poison.encode(body) do
-      {:ok, http_body} ->
-        post("#{@endpoint}/track", http_body, headers())
-
-      {:error, _} = error ->
-        error
-    end
+    body
+    |> remove_nil_values()
+    |> Poison.encode()
+    |> post_or_return_error("track")
   end
 
-  def identify(user_id, traits) do
-    body = %{userId: user_id, traits: traits, context: context()}
+  def identify(user_id, traits, options \\ %{}) do
+    body = %{
+      userId: user_id,
+      traits: traits,
+      context: context(),
+      integrations: Map.get(options, :integrations)
+    }
 
-    case Poison.encode(body) do
-      {:ok, http_body} ->
-        post("#{@endpoint}/identify", http_body, headers())
-
-      {:error, _} = error ->
-        error
-    end
+    body
+    |> remove_nil_values()
+    |> Poison.encode()
+    |> post_or_return_error("identify")
   end
 
   def context,
     do: %{library: %{name: "elixir-segment-api", version: @app_version}}
+
+  defp remove_nil_values(map) do
+    map
+    |> Enum.reject(fn {_, v} -> is_nil(v) end)
+    |> Enum.into(%{})
+  end
+
+  defp post_or_return_error({:ok, http_body}, path), do: post_to_segment(path, http_body)
+
+  defp post_or_return_error({:error, _} = error, _), do: error
+
+  defp post_to_segment(path, http_body), do: post("#{@endpoint}/#{path}", http_body, headers())
 
   def process_response_status_code(200), do: Logger.debug("#{__MODULE__} successfully called")
 
@@ -52,5 +64,6 @@ defmodule SegmentAPI do
 
   defp headers, do: [Authorization: auth_header(), "Content-Type": "application/json"]
 
-  defp auth_header, do: "Basic #{Base.encode64(Application.get_env(:segment_api, :api_key, "") <> ":")}"
+  defp auth_header,
+    do: "Basic #{Base.encode64(Application.get_env(:segment_api, :api_key, "") <> ":")}"
 end
