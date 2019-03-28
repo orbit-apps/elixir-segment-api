@@ -52,5 +52,6 @@ defmodule SegmentAPI do
 
   defp headers, do: [Authorization: auth_header(), "Content-Type": "application/json"]
 
-  defp auth_header, do: "Basic #{Base.encode64(Application.get_env(:segment_api, :api_key, "") <> ":")}"
+  defp auth_header,
+    do: "Basic #{Base.encode64(Application.get_env(:segment_api, :api_key, "") <> ":")}"
 end
