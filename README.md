@@ -30,6 +30,7 @@ type = :customer_data_request
 SegmentAPI.track(
   SegmentAPI.event(app_slug, type),
   shopify_domain,
-  %{data: %{foo: "bar"}}
+  %{data: %{foo: "bar"}},
+  %{integrations: %{All: true, Salesforce: false}}
 )
 ```
