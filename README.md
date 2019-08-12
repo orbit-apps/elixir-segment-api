@@ -20,6 +20,12 @@ Add the following configuration to your config.ex
 config :segment_api, :api_key, "<your encoded basic auth keys>"
 ```
 
+Uses Jason for json transcoding by default, if you want to configure it to use Poison add the following.
+
+```elixir
+config segment_api, json_library, Poison
+```
+
 Use like
 
 ```elixir
