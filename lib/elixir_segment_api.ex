@@ -57,10 +57,15 @@ defmodule SegmentAPI do
 
   defp post_to_segment(path, http_body), do: post("#{@endpoint}/#{path}", http_body, headers())
 
-  def process_response_status_code(200), do: Logger.debug("#{__MODULE__} successfully called")
+  def process_response_status_code(200) do
+    Logger.debug("#{__MODULE__} successfully called")
+    200
+  end
 
-  def process_response_status_code(status_code),
-    do: Logger.info("#{__MODULE__} not successfully called, returned #{status_code}")
+  def process_response_status_code(status_code) do
+    Logger.info("#{__MODULE__} not successfully called, returned #{status_code}")
+    status_code
+  end
 
   defp headers, do: [Authorization: auth_header(), "Content-Type": "application/json"]
 
