@@ -72,5 +72,5 @@ defmodule SegmentAPI do
   defp auth_header,
     do: "Basic #{Base.encode64(Application.get_env(:segment_api, :api_key, "") <> ":")}"
 
-  defp json_library, do: Application.get_env(:segment_api, :json_impl, Jason)
+  defp json_library, do: Application.get_env(:segment_api, :json_library, Jason)
 end
