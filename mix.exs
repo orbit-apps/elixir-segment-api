@@ -24,7 +24,7 @@ defmodule SegmentAPI.MixProject do
   defp deps do
     [
       {:credo, "~> 1.0", only: [:dev, :test]},
-      {:dialyxir, "~> 0.5", only: [:dev], runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:httpoison, "~> 1.0"}
     ]
   end
