@@ -9,7 +9,7 @@ Package can be installed by adding `segment_api` to your list of dependencies in
 ```elixir
 def deps do
   [
-    {:segment_api, github: "pixelunion/elixir-segment-api", tag: "v0.2.3"}
+    {:segment_api, github: "pixelunion/elixir-segment-api", tag: "v0.3.0"}
   ]
 end
 ```
