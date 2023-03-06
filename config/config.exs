@@ -28,6 +28,4 @@ import Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env()}.exs"
-config :logger,
-  level: :warn,
-  compile_time_purge_level: :debug
+config :logger, level: :warn
