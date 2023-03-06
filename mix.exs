@@ -23,9 +23,9 @@ defmodule SegmentAPI.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:credo, "~> 1.0", only: [:dev, :test]},
-      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:httpoison, "~> 1.0"}
+      {:credo, "~> 1.6", only: [:dev, :test]},
+      {:dialyxir, "~> 1.2", only: [:dev], runtime: false},
+      {:httpoison, "~> 2.0"}
     ]
   end
 end
