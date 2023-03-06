@@ -7,7 +7,7 @@ defmodule SegmentAPI.MixProject do
     [
       app: :segment_api,
       version: @version,
-      elixir: "~> 1.7",
+      elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
