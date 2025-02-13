@@ -9,7 +9,7 @@ Package can be installed by adding `segment_api` to your list of dependencies in
 ```elixir
 def deps do
   [
-    {:segment_api, github: "Beam-Maintenance/elixir-segment-api", tag: "v0.5.0"}
+    {:segment_api, github: "Beam-Maintenance/elixir-segment-api", tag: "v0.5.1"}
   ]
 end
 ```
