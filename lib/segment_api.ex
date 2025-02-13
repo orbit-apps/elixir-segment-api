@@ -7,6 +7,9 @@ defmodule SegmentAPI do
   # As per docs https://segment.com/docs/sources/server/http/
   @app_version Keyword.get(Mix.Project.config(), :version)
 
+  @type response() :: {:ok, Req.Response.t()} | {:error, Exception.t()}
+
+  @spec track(String.t(), String.t(), map(), map()) :: response()
   def track(event, user_id, properties, options \\ %{}) do
     body = %{
       event: event,
@@ -17,9 +20,10 @@ defmodule SegmentAPI do
     }
 
     new_request()
-    |> Req.run(url: "/track", json: remove_nil_values(body))
+    |> Req.post(url: "/track", json: remove_nil_values(body))
   end
 
+  @spec identify(String.t(), map(), map()) :: response()
   def identify(user_id, traits, options \\ %{}) do
     body = %{
       userId: user_id,
@@ -29,7 +33,7 @@ defmodule SegmentAPI do
     }
 
     new_request()
-    |> Req.run(url: "/identify", json: remove_nil_values(body))
+    |> Req.post(url: "/identify", json: remove_nil_values(body))
   end
 
   def context,
@@ -39,7 +43,7 @@ defmodule SegmentAPI do
     do: map |> Enum.reject(fn {_, v} -> is_nil(v) end) |> Enum.into(%{})
 
   defp new_request do
-    Req.Request.new(method: :post, base_url: @base_url)
+    Req.Request.new(base_url: @base_url)
     |> append_application_headers()
     |> append_authorization_header()
   end
