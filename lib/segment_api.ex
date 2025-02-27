@@ -43,7 +43,7 @@ defmodule SegmentAPI do
     do: map |> Enum.reject(fn {_, v} -> is_nil(v) end) |> Enum.into(%{})
 
   defp new_request do
-    Req.Request.new(base_url: @base_url)
+    Req.new(base_url: @base_url)
     |> append_application_headers()
     |> append_authorization_header()
   end
