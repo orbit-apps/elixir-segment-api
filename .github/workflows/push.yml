@@ -7,7 +7,7 @@ jobs:
     env:
       MIX_ENV: test
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Cache dialyzer plts
         uses: actions/cache@v6
